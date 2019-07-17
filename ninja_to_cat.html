@@ -8,6 +8,7 @@
         <script>
             $(document).ready(function(){
                 $('img').click(function(){
+                    $(this).fadeOut();
                     var alt_src = $(this).attr("data-alt-src");
                     $(this).attr("src", alt_src);
                 });
