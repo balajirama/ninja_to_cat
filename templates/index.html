@@ -1,0 +1,50 @@
+{% extends "master.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% with errors = get_flashed_messages(category_filter=['error']) %}
+    {% for message in errors %}
+    <div class="alert alert-danger" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endwith %}
+    {% with successes = get_flashed_messages(category_filter=['success']) %}
+    {% for message in successes %}
+    <div class="alert alert-success" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endwith %}
+    {%for i in ['0', '1', '2', '3', '4']%}
+    {%set file1 = 'img/ninja'+i+'.png'%}
+    {%set file2 = 'img/cat'+i+'.png'%}
+    <div class="row">
+        <div class="col"></div>
+        <div class="col">
+            <img src="{{url_for('static', filename=file1)}}" data-alt-src="{{url_for('static', filename=file2)}}" width="400px">
+         </div>
+        <div class="col"></div>
+    </div>
+    {%endfor%}
+
+</div>
+{% endblock %}
+
+{% block morescripts %}
+
+<script>
+
+$('img').click(function() {
+    var oldimg = $(this).attr('src');
+    $(this).attr('src', $(this).attr('data-alt-src'));
+    $(this).attr('data-alt-src', oldimg);
+});
+
+</script>
+
+{% endblock morescripts %}
+
